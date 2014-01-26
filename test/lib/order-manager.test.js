@@ -5,8 +5,6 @@ var rewire = require('rewire')
 
 function noop() {}
 
-sinon = sinon
-
 describe('order-manager', function () {
 
   describe('loadOrders()', function () {
