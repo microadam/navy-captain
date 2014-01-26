@@ -1,0 +1,12 @@
+module.exports = function () {
+
+  var config =
+  { name: 'captain-one'
+  , appId: 'testApp'
+  , admiral: { host: 'http://127.0.0.1', port: 8006 }
+  , orderDir: __dirname + '/orders'
+  , orders: { 'test-order': { command: 'test' } }
+  }
+
+  return config
+}
