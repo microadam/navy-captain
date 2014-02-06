@@ -14,7 +14,7 @@ app.unknownOption = function (arg) {
 }
 
 app
-  .version('0.0.1')
+  .version(require('./package.json').version)
   .option('-c, --config [./config.js]', 'path to config file [./config.js]', './config.js')
 
 app.parse(process.argv)
