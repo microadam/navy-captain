@@ -1,4 +1,4 @@
-var createHandleEvents = require('../../lib/event-handler')
+var createEventHandler = require('../../lib/event-handler')
   , EventEmitter = require('events').EventEmitter
 
 function Client() {
@@ -19,9 +19,9 @@ describe('event-handler', function () {
                 done()
               }
             }
-        , handleEvents = createHandleEvents(logger)
+        , eventHandler = createEventHandler({ logger: logger })
 
-      handleEvents(client)
+      eventHandler.handleEvents(client)
       client.emit('serverMessage', { message: 'hello' })
     })
 

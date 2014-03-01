@@ -26,7 +26,8 @@
     "primus-emitter": "~3.0",
     "primus-responder": "~1.0.1",
     "ws": "~0.4.31",
-    "async": "~0.2.9"
+    "async": "~0.2.9",
+    "service-locator": "0.0.2"
   },
   "devDependencies": {
     "jshint": "~2.4.1",

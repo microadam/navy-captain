@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 var app = require('commander')
-  , path = require('path')
   , bunyan = require('bunyan')
   , logger = bunyan.createLogger({ name: 'captaind' })
-  , createOrderManager = require('./lib/order-manager')
-  , createSocketCaptain = require('./lib/socket-captain')
+  , bootstrap = require('./bootstrap')
+  , path = require('path')
 
 app.unknownOption = function (arg) {
   console.log('')
@@ -28,16 +27,11 @@ try {
 }
 
 if (config) {
-  var orderManager =
-      createOrderManager
-      ( logger
-      , config
-      )
-    , socketCaptain = createSocketCaptain(orderManager, logger, config)
-
-  orderManager.loadOrders(function (loaded) {
-    if (loaded) {
-      socketCaptain.run()
-    }
+  bootstrap(logger, config, function (serviceLocator) {
+    serviceLocator.orderManager.loadOrders(function (loaded) {
+      if (loaded) {
+        serviceLocator.socketCaptain.run(config)
+      }
+    })
   })
 }

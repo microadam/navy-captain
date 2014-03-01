@@ -1,6 +1,6 @@
 var createMessageEmitter = require('../../lib/message-emitter')
   , logger = { info: function() {} }
-  , captainConfig = { appId: 'appId', name: 'name' }
+  , config = { appId: 'appId', name: 'name' }
 
 function createClient(sendFn) {
   return { send: sendFn }
@@ -11,7 +11,7 @@ describe('message-emitter', function () {
   describe('emitRegisterMessage()', function () {
 
     it('should send correct data', function (done) {
-      var messageEmitter = createMessageEmitter(logger, captainConfig)
+      var messageEmitter = createMessageEmitter({ logger: logger, config: config })
         , client = createClient(function (event, data) {
             event.should.equal('captainRegister')
             Object.keys(data).length.should.equal(2)
@@ -28,7 +28,7 @@ describe('message-emitter', function () {
   describe('emitOrderMessage()', function () {
 
     it('should send correct data', function (done) {
-      var messageEmitter = createMessageEmitter(logger, captainConfig)
+      var messageEmitter = createMessageEmitter({ logger: logger, config: config })
         , client = createClient(function (event, data) {
             event.should.equal('captainOrderMessage')
             Object.keys(data).length.should.equal(3)

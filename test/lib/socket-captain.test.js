@@ -18,28 +18,27 @@ describe('socket-captain', function () {
   describe('run()', function () {
 
     var socketStub = null
-      , handleEvents = null
-      , handleRequests = null
 
     beforeEach(function () {
       socketStub = sinon.stub()
       socketStub.returns(new Socket())
-      handleEvents = sinon.spy()
-      handleRequests = sinon.spy()
 
       /* jshint camelcase: false */
-      createSocketCaptain.__set__
-      ( { Socket: socketStub
-        , createMessageEmitter: function () { return messageEmitter }
-        , createHandleEvents: function () { return handleEvents }
-        , createHandleRequests: function () { return handleRequests }
-        }
-      )
+      createSocketCaptain.__set__({ Socket: socketStub })
     })
 
     it('should emit register event and handle events and requests on server connection', function () {
       var mockMessageEmitter = sinon.mock(messageEmitter)
-        , socketCaptain = createSocketCaptain(null, logger, {})
+        , handleEvents = sinon.spy()
+        , handleRequests = sinon.spy()
+        , serviceLocator =
+            { logger: logger
+            , messageEmitter: messageEmitter
+            , eventHandler: { handleEvents: handleEvents }
+            , requestHandler: { handleRequests: handleRequests }
+            , config: {}
+            }
+        , socketCaptain = createSocketCaptain(serviceLocator)
         , client = socketCaptain.run()
 
       mockMessageEmitter.expects('emitRegisterMessage').once()
@@ -52,7 +51,7 @@ describe('socket-captain', function () {
 
     it('should reconnect on disconnect after specified interval', function (done) {
       var config = { reconnectInterval: 10 }
-        , socketCaptain = createSocketCaptain(null, logger, config)
+        , socketCaptain = createSocketCaptain({ logger: logger, config: config })
         , client = socketCaptain.run()
 
       client.emit('close')
@@ -64,7 +63,7 @@ describe('socket-captain', function () {
 
     it('should reconnect on disconnect after default interval', function (done) {
       this.timeout(4000)
-      var socketCaptain = createSocketCaptain(null, logger, {})
+      var socketCaptain = createSocketCaptain({ logger: logger, config: {} })
         , client = socketCaptain.run()
 
       client.emit('close')
@@ -75,7 +74,7 @@ describe('socket-captain', function () {
     })
 
     it('should connect to the default admiral if no connection details provided', function () {
-      var socketCaptain = createSocketCaptain(null, logger, {})
+      var socketCaptain = createSocketCaptain({ logger: logger, config: {} })
 
       socketCaptain.run()
       socketStub.calledWith('http://127.0.0.1:8006').should.equal(true)
@@ -83,7 +82,7 @@ describe('socket-captain', function () {
 
     it('should connect to the provided admiral when given connection details', function () {
       var config = { admiral: { host: 'http://127.0.0.2', port: '8001' } }
-        , socketCaptain = createSocketCaptain(null, logger, config)
+        , socketCaptain = createSocketCaptain({ logger: logger, config: config })
 
       socketCaptain.run()
       socketStub.calledWith('http://127.0.0.2:8001').should.equal(true)

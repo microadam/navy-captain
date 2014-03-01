@@ -16,7 +16,11 @@ function getOrderExecuter(steps) {
           }
         }
       , orderManager = { getOrder: function () { return order } }
-      , orderExecuter = createOrderExecuter(orderManager, messageEmitter)
+      , serviceLocator =
+          { orderManager: orderManager
+          , messageEmitter: messageEmitter
+          }
+      , orderExecuter = createOrderExecuter(serviceLocator)
 
   return orderExecuter
 }

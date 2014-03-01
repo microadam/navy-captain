@@ -5,7 +5,11 @@ var sinon = require('sinon')
       { getOrderNames: function () {}
       , getOrderSteps: function () {}
       }
-  , handleRequests = require('../../lib/request-handler')(orderManager, orderExecuter)
+  , serviceLocator =
+      { orderManager: orderManager
+      , orderExecuter: orderExecuter
+      }
+  , requestHandler = require('../../lib/request-handler')(serviceLocator)
 
 function getClient(requestData) {
 
@@ -30,7 +34,7 @@ describe('request-handler', function () {
 
       mockOrderManager.expects('getOrderNames').once()
 
-      handleRequests(client)
+      requestHandler.handleRequests(client)
       client.emit('request')
 
       mockOrderManager.verify()
@@ -42,7 +46,7 @@ describe('request-handler', function () {
 
       mockOrderManager.expects('getOrderSteps').once()
 
-      handleRequests(client)
+      requestHandler.handleRequests(client)
       client.emit('request')
 
       mockOrderManager.verify()
@@ -54,7 +58,7 @@ describe('request-handler', function () {
 
       mockOrderExecuter.expects('execute').once()
 
-      handleRequests(client)
+      requestHandler.handleRequests(client)
       client.emit('request')
 
       mockOrderExecuter.verify()

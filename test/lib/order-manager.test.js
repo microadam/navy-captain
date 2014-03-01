@@ -11,7 +11,7 @@ describe('order-manager', function () {
 
     it('should not load anything when there are no orders in config', function (done) {
       var config = {}
-        , orderManager = createOrderManger(logger, config)
+        , orderManager = createOrderManger({ logger: logger, config: config })
 
       orderManager.loadOrders(function (loaded) {
         loaded.should.equal(false)
@@ -21,7 +21,7 @@ describe('order-manager', function () {
 
     it('should not load anything when there are orders in config but no files to load', function (done) {
       var config = { orders: { one: {} } }
-        , orderManager = createOrderManger(logger, config)
+        , orderManager = createOrderManger({ logger: logger, config: config })
 
       orderManager.loadOrders(function (loaded) {
         loaded.should.equal(false)
@@ -48,7 +48,7 @@ describe('order-manager', function () {
           { orderDir: ''
           , orders: { one: {} }
           }
-        , orderManager = createOrderManger(logger, config)
+        , orderManager = createOrderManger({ logger: logger, config: config })
 
       orderManager.loadOrders(function (loaded) {
         loaded.should.equal(true)
@@ -76,7 +76,7 @@ describe('order-manager', function () {
           { orderDir: ''
           , orders: { one: {} }
           }
-        , orderManager = createOrderManger(logger, config)
+        , orderManager = createOrderManger({ logger: logger, config: config })
 
       orderManager.loadOrders(function (loaded) {
         loaded.should.equal(true)
@@ -116,7 +116,7 @@ describe('order-manager', function () {
           { orderDir: ''
           , orders: { one: { command: 'orderOne' } }
           }
-      orderManager = createOrderManger(logger, config)
+      orderManager = createOrderManger({ logger: logger, config: config })
       orderManager.loadOrders(function () {
         done()
       })
