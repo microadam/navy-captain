@@ -1,5 +1,7 @@
 # navy-captain
 
+![build status](http://ci.microadam.co.uk/microadam/navy-captain/badge)
+
 Executes orders (tasks) received from the [Admiral](http://github.com/microadam/navy-admiral) which have been issued via the [comms](http://github.com/microadam/navy-comms) CLI.
 
 ## Installation
