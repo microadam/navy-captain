@@ -20,14 +20,15 @@
     "posttest": "./node_modules/.bin/istanbul check-coverage && rm -rf coverage"
   },
   "dependencies": {
+    "async": "~0.2.9",
     "bunyan": "~0.22.1",
     "commander": "~2.1.0",
+    "mc-logger": "0.0.0",
     "primus": "~2.0",
     "primus-emitter": "~3.0",
     "primus-responder": "~1.0.1",
-    "ws": "~0.4.31",
-    "async": "~0.2.9",
-    "service-locator": "0.0.2"
+    "service-locator": "0.0.2",
+    "ws": "~0.4.31"
   },
   "devDependencies": {
     "jshint": "~2.4.1",
