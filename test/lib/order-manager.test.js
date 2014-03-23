@@ -144,10 +144,15 @@ describe('order-manager', function () {
 
     describe ('getOrderSteps()', function () {
 
-      it('should return order with given name', function () {
+      it('should return order steps for specified order', function () {
         var orderSteps = orderManager.getOrderSteps('orderOne')
         orderSteps.length.should.equal(1)
         orderSteps[0].should.equal('one')
+      })
+
+      it('should return false when specified order does not exist', function () {
+        var orderSteps = orderManager.getOrderSteps('orderTen')
+        orderSteps.should.equal(false)
       })
 
     })
