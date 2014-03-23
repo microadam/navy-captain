@@ -24,7 +24,12 @@ module.exports = function test() {
     context.emit('This is test order step two for: ' + context.appId)
     context.emit('Argument 1 from previous step is: ' + dataOne )
     context.emit('Argument 2 from previous step is: ' + dataTwo )
-    callback(null, 3, 4)
+
+    context.emit('###### Running test2')
+    context.executeOrder('test1', [ 8, 9 ], function (response) {
+      context.emit('test2 response: ' + response.success)
+      callback(null, 3, 4)
+    })
   }
 
   function baz(context, dataOne, dataTwo, callback) {
