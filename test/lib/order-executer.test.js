@@ -1,6 +1,7 @@
 var sinon = require('sinon')
   , async = require('async')
   , messageEmitter = { emitOrderMessage: function () {} }
+  , requestSender = { sendExecuteOrder: function () {} }
   , createOrderExecuter = require('../../lib//order-executer')
 
 function getOrderExecuter(steps) {
@@ -19,6 +20,7 @@ function getOrderExecuter(steps) {
       , serviceLocator =
           { orderManager: orderManager
           , messageEmitter: messageEmitter
+          , requestSender: requestSender
           }
       , orderExecuter = createOrderExecuter(serviceLocator)
 

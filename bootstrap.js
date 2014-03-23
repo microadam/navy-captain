@@ -5,6 +5,7 @@ var serviceLocator = require('service-locator').createServiceLocator()
   , createOrderExecuter = require('./lib/order-executer')
   , createRequestHandler = require('./lib/request-handler')
   , createMessageEmitter = require('./lib/message-emitter')
+  , createRequestSender = require('./lib/request-sender')
 
 module.exports = function bootstrap(logger, config, callback) {
   serviceLocator.register('logger', logger)
@@ -15,6 +16,7 @@ module.exports = function bootstrap(logger, config, callback) {
     , messageEmitter = createMessageEmitter(serviceLocator, config)
     , orderExecuter = createOrderExecuter(serviceLocator)
     , requestHandler = createRequestHandler(serviceLocator)
+    , requestSender = createRequestSender(serviceLocator)
 
   serviceLocator.register('config', config)
   serviceLocator.register('orderManager', orderManager)
@@ -23,6 +25,7 @@ module.exports = function bootstrap(logger, config, callback) {
   serviceLocator.register('orderExecuter', orderExecuter)
   serviceLocator.register('eventHandler', eventHandler)
   serviceLocator.register('requestHandler', requestHandler)
+  serviceLocator.register('requestSender', requestSender)
 
   callback(serviceLocator)
 }

@@ -12,6 +12,7 @@ describe('bootstrap', function () {
       should.exist(serviceLocator.orderExecuter)
       should.exist(serviceLocator.eventHandler)
       should.exist(serviceLocator.requestHandler)
+      should.exist(serviceLocator.requestSender)
     })
   })
 
