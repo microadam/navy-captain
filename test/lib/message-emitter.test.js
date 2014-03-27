@@ -1,6 +1,9 @@
 var createMessageEmitter = require('../../lib/message-emitter')
   , logger = { info: function() {} }
-  , config = { appId: 'appId', name: 'name' }
+  , config =
+      { name: 'name'
+      , applications: { test: [ 'testing', 'staging' ] }
+      }
 
 function createClient(sendFn) {
   return { send: sendFn }
@@ -15,7 +18,11 @@ describe('message-emitter', function () {
         , client = createClient(function (event, data) {
             event.should.equal('captainRegister')
             Object.keys(data).length.should.equal(2)
-            data.appId.should.equal('appId')
+            Object.keys(data.applications).length.should.equal(1)
+            Object.keys(data.applications)[0].should.equal('test')
+            data.applications.test.length.should.equal(2)
+            data.applications.test[0].should.equal('testing')
+            data.applications.test[1].should.equal('staging')
             data.captainName.should.equal('name')
             done()
           })

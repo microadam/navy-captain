@@ -17,6 +17,7 @@ module.exports = function test() {
   function foo(context, callback) {
     context.emit('This is test order step one for: ' + context.appId)
     context.emit('Provided arguments for this order were ' + context.orderArgs)
+    context.emit('App data is: ' + JSON.stringify(context.appData))
     callback(null, 1, 2)
   }
 
