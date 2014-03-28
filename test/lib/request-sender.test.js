@@ -13,8 +13,9 @@ describe('request-sender', function () {
       var requestSender = createRequestSender({ logger: logger })
         , client = createClient(function (event, data, callback) {
             event.should.equal('captainExecuteOrder')
-            Object.keys(data).length.should.equal(4)
+            Object.keys(data).length.should.equal(5)
             data.appId.should.equal('appId')
+            data.environment.should.equal('testing')
             data.clientId.should.equal(1)
             data.order.should.equal('myOrder')
             data.orderArgs.length.should.equal(1)
@@ -25,6 +26,7 @@ describe('request-sender', function () {
       requestSender.sendExecuteOrder(client
       , 1
       , 'appId'
+      , 'testing'
       , 'myOrder'
       , [ 'argOne' ]
       , function () {
