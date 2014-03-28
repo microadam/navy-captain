@@ -6,7 +6,7 @@ module.exports = function () {
   , admiral: { host: 'http://127.0.0.1', port: 8006 }
   , orderDir: __dirname + '/orders'
   , orders:
-    { 'test-order': { command: 'test' }
+    { 'test-order': { command: 'test', config: { exampleConfigOption: 'config-option' } }
     , 'test-order-two': { command: 'test2' }
     }
   }

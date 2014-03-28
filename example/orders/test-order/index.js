@@ -1,4 +1,4 @@
-module.exports = function test() {
+module.exports = function test(config) {
 
   var steps =
   { foo: foo
@@ -19,6 +19,7 @@ module.exports = function test() {
     context.emit('This is running on environment: ' + context.environment)
     context.emit('Provided arguments for this order were ' + context.orderArgs)
     context.emit('App data is: ' + JSON.stringify(context.appData))
+    context.emit('Config for this order is: ' + JSON.stringify(config))
     callback(null, 1, 2)
   }
 
