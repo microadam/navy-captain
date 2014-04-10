@@ -7,16 +7,26 @@ var sinon = require('sinon')
 function getOrderExecuter(steps) {
   var stepObj = {}
 
-  steps.forEach(function (step, index) {
-    stepObj['step' + index] = step
-  })
+  if (steps) {
+    steps.forEach(function (step, index) {
+      stepObj['step' + index] = step
+    })
+  }
 
   var order =
         { getSteps: function () {
             return stepObj
           }
         }
-      , orderManager = { getOrder: function () { return order } }
+      , orderManager =
+          { getOrder: function () {
+              if (steps) {
+                return order
+              } else {
+                return false
+              }
+            }
+          }
       , serviceLocator =
           { orderManager: orderManager
           , messageEmitter: messageEmitter
@@ -89,6 +99,16 @@ describe('order-executer', function () {
         stepOne.calledWith(sinon.match.object, sinon.match.func).should.equal(true)
         response.success.should.equal(false)
         response.message.should.equal('ERROR')
+        done()
+      })
+    })
+
+    it('should return success when given an unrecognised order', function (done) {
+      var orderExecuter = getOrderExecuter(false)
+        , data = {}
+
+      orderExecuter.execute(data, null, function (response) {
+        response.success.should.equal(true)
         done()
       })
     })
