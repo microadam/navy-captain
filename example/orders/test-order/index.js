@@ -15,6 +15,7 @@ module.exports = function test(config) {
   }
 
   function foo(context, callback) {
+    context.emit('Captain is master? ' + context.isMaster)
     context.emit('This is test order step one for: ' + context.appId)
     context.emit('This is running on environment: ' + context.environment)
     context.emit('Provided arguments for this order were ' + context.orderArgs)

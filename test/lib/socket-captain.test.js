@@ -31,11 +31,13 @@ describe('socket-captain', function () {
       var mockMessageEmitter = sinon.mock(messageEmitter)
         , handleEvents = sinon.spy()
         , handleRequests = sinon.spy()
+        , resetMasterState = sinon.spy()
         , serviceLocator =
             { logger: logger
             , messageEmitter: messageEmitter
             , eventHandler: { handleEvents: handleEvents }
             , requestHandler: { handleRequests: handleRequests }
+            , stateHandler: { resetMasterState: resetMasterState }
             , config: {}
             }
         , socketCaptain = createSocketCaptain(serviceLocator)
@@ -46,6 +48,7 @@ describe('socket-captain', function () {
       client.emit('open')
       handleEvents.calledOnce.should.equal(true)
       handleRequests.calledOnce.should.equal(true)
+      resetMasterState.calledOnce.should.equal(true)
       mockMessageEmitter.verify()
     })
 

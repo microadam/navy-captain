@@ -24,7 +24,7 @@
     "bunyan": "~0.22.1",
     "commander": "~2.1.0",
     "mc-logger": "0.0.0",
-    "primus": "~2.0",
+    "primus": "~2.3",
     "primus-emitter": "~3.0",
     "primus-responder": "~1.0.1",
     "service-locator": "0.0.2",

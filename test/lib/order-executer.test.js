@@ -31,6 +31,7 @@ function getOrderExecuter(steps) {
           { orderManager: orderManager
           , messageEmitter: messageEmitter
           , requestSender: requestSender
+          , stateHandler: { getMasterState: function () {} }
           }
       , orderExecuter = createOrderExecuter(serviceLocator)
 
