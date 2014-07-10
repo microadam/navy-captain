@@ -80,15 +80,15 @@ describe('socket-captain', function () {
       var socketCaptain = createSocketCaptain({ logger: logger, config: {} })
 
       socketCaptain.run()
-      socketStub.calledWith('http://127.0.0.1:8006').should.equal(true)
+      socketStub.calledWith('http://none:none@127.0.0.1:8006').should.equal(true)
     })
 
     it('should connect to the provided admiral when given connection details', function () {
-      var config = { admiral: { host: 'http://127.0.0.2', port: '8001' } }
+      var config = { admiral: { host: '127.0.0.2', port: '8001', user: 'test', password: 'test' } }
         , socketCaptain = createSocketCaptain({ logger: logger, config: config })
 
       socketCaptain.run()
-      socketStub.calledWith('http://127.0.0.2:8001').should.equal(true)
+      socketStub.calledWith('http://test:test@127.0.0.2:8001').should.equal(true)
     })
 
   })
