@@ -84,11 +84,11 @@ describe('socket-captain', function () {
     })
 
     it('should connect to the provided admiral when given connection details', function () {
-      var config = { admiral: { host: '127.0.0.2', port: '8001', user: 'test', password: 'test' } }
+      var config = { admiral: { protocol: 'https', host: '127.0.0.2', port: '8001', user: 'test', password: 'test' } }
         , socketCaptain = createSocketCaptain({ logger: logger, config: config })
 
       socketCaptain.run()
-      socketStub.calledWith('http://test:test@127.0.0.2:8001').should.equal(true)
+      socketStub.calledWith('https://test:test@127.0.0.2:8001').should.equal(true)
     })
 
   })
