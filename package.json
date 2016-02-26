@@ -1,7 +1,7 @@
 {
   "name": "navy-captain",
   "description": "Executes orders (tasks) received from the Admiral which have been issued via the comms CLI.",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "repository": {
     "type": "git",
     "url": "git@github.com:microadam/navy-captain"
