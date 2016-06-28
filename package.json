@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "async": "~0.2.9",
-    "bunyan": "~0.22.1",
+    "bunyan": "^1.8.1",
     "commander": "~2.1.0",
     "mc-logger": "0.0.0",
     "primus": "~2.3",
